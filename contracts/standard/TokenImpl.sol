@@ -1,7 +1,6 @@
 pragma solidity ^0.4.11;
 
-
-import './ERC20BasicImpl.sol';
+import '../math/SafeMath.sol';
 import './ReadOnlyTokenImpl.sol';
 import './Token.sol';
 
@@ -13,7 +12,7 @@ import './Token.sol';
  * @dev https://github.com/ethereum/EIPs/issues/20
  * @dev Based on code by FirstBlood: https://github.com/Firstbloodio/token/blob/master/smart_contract/FirstBloodToken.sol
  */
-contract TokenImpl is Token, ReadOnlyTokenImpl, ERC20BasicImpl {
+contract TokenImpl is Token, ReadOnlyTokenImpl {
   using SafeMath for uint256;
 
   /**

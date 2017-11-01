@@ -10,13 +10,13 @@ contract ExternalToken is ReceiveNotifyTokenImpl {
     event Mint(address indexed to, uint256 value, bytes data);
     event Burn(address indexed burner, uint256 value, bytes data);
 
-    function mint(address _to, uint256 _value, bytes _mintData) onlyOwner public returns (bool) {
+    function mint(address _to, uint256 _value, bytes _mintData) public returns (bool) {
         _mint(_to, _value, _mintData);
         emitTransferWithData(0x0, _to, _value, "");
         return true;
     }
 
-    function mintAndCall(address _to, uint256 _value, bytes _mintData, bytes _data) onlyOwner public returns (bool) {
+    function mintAndCall(address _to, uint256 _value, bytes _mintData, bytes _data) public returns (bool) {
         _mint(_to, _value, _mintData);
         emitTransferWithData(0x0, _to, _value, _data);
         TokenReceiver(_to).onTokenTransfer(0x0, _value, _data);
