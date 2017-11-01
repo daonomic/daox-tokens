@@ -6,7 +6,7 @@ import "./ReadOnlyToken.sol";
 
 contract ReadOnlyTokenImpl is ReadOnlyToken {
     mapping(address => uint256) balances;
-    mapping (address => mapping (address => uint256)) internal allowed;
+    mapping(address => mapping(address => uint256)) internal allowed;
 
     /**
     * @dev Gets the balance of the specified address.
