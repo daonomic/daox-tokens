@@ -2,11 +2,11 @@ pragma solidity ^0.4.11;
 
 
 import './TokenImpl.sol';
-import './ReceiveNotifyToken.sol';
+import './NotifyingToken.sol';
 import './TokenReceiver.sol';
 
 
-contract ReceiveNotifyTokenImpl is TokenImpl, ReceiveNotifyToken {
+contract NotifyingTokenImpl is TokenImpl, NotifyingToken {
     function transfer(address _to, uint256 _value, bytes _data) public returns (bool) {
         return transferAndCall(_to, _value, _data);
     }

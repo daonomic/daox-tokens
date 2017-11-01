@@ -1,22 +1,28 @@
 pragma solidity ^0.4.11;
 
 
-import '../standard/ReceiveNotifyTokenImpl.sol';
+import '../standard/NotifyingTokenImpl.sol';
 import '../standard/TokenReceiver.sol';
 
 
-contract ExternalToken is ReceiveNotifyTokenImpl {
-    event Mint(address indexed to, uint256 value);
+contract ExternalToken is NotifyingTokenImpl {
     event Mint(address indexed to, uint256 value, bytes data);
     event Burn(address indexed burner, uint256 value, bytes data);
 
-    function mint(address _to, uint256 _value, bytes _mintData) public returns (bool) {
+    modifier onlyMinter() {
+        checkMinter();
+        _;
+    }
+
+    function checkMinter() internal;
+
+    function mint(address _to, uint256 _value, bytes _mintData) onlyMinter public returns (bool) {
         _mint(_to, _value, _mintData);
         emitTransferWithData(0x0, _to, _value, "");
         return true;
     }
 
-    function mintAndCall(address _to, uint256 _value, bytes _mintData, bytes _data) public returns (bool) {
+    function mintAndCall(address _to, uint256 _value, bytes _mintData, bytes _data) onlyMinter public returns (bool) {
         _mint(_to, _value, _mintData);
         emitTransferWithData(0x0, _to, _value, _data);
         TokenReceiver(_to).onTokenTransfer(0x0, _value, _data);
@@ -27,13 +33,12 @@ contract ExternalToken is ReceiveNotifyTokenImpl {
         totalSupply = totalSupply.add(_value);
         balances[_to] = balances[_to].add(_value);
         Mint(_to, _value, _data);
-        Mint(_to, _value);
     }
 
     function burn(uint256 _value, bytes _data) public {
         require(_value > 0);
         require(_value <= balances[msg.sender]);
-        checkBuyBackData(_value, _data);
+        checkBurnData(_value, _data);
 
         address burner = msg.sender;
         balances[burner] = balances[burner].sub(_value);
@@ -41,7 +46,7 @@ contract ExternalToken is ReceiveNotifyTokenImpl {
         Burn(burner, _value, _data);
     }
 
-    function checkBuyBackData(uint256 _value, bytes _data) internal {
+    function checkBurnData(uint256 _value, bytes _data) internal {
 
     }
 }
