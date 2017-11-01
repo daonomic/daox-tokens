@@ -1,19 +1,20 @@
 pragma solidity ^0.4.0;
 
 
-import "./ReadOnlyERC20Basic.sol";
-import "./ERC20.sol";
+import "./ReadOnlyToken.sol";
 
 
-contract ReadOnlyERC20 is ReadOnlyERC20Basic, ERC20 {
+contract ReadOnlyTokenImpl is ReadOnlyToken {
+    mapping(address => uint256) balances;
     mapping (address => mapping (address => uint256)) internal allowed;
 
-    function transferFrom(address _from, address _to, uint256 _value) whenNotPaused public returns (bool) {
-        revert();
-    }
-
-    function approve(address _spender, uint256 _value) whenNotPaused public returns (bool) {
-        revert();
+    /**
+    * @dev Gets the balance of the specified address.
+    * @param _owner The address to query the the balance of.
+    * @return An uint256 representing the amount owned by the passed address.
+    */
+    function balanceOf(address _owner) public constant returns (uint256 balance) {
+        return balances[_owner];
     }
 
     /**

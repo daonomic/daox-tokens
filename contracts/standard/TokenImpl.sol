@@ -2,8 +2,8 @@ pragma solidity ^0.4.11;
 
 
 import './ERC20BasicImpl.sol';
-import './ReadOnlyERC20.sol';
-import './ERC20.sol';
+import './ReadOnlyTokenImpl.sol';
+import './Token.sol';
 
 
 /**
@@ -13,7 +13,28 @@ import './ERC20.sol';
  * @dev https://github.com/ethereum/EIPs/issues/20
  * @dev Based on code by FirstBlood: https://github.com/Firstbloodio/token/blob/master/smart_contract/FirstBloodToken.sol
  */
-contract ERC20Impl is ERC20, ReadOnlyERC20, ERC20BasicImpl {
+contract TokenImpl is Token, ReadOnlyTokenImpl, ERC20BasicImpl {
+  using SafeMath for uint256;
+
+  /**
+  * @dev transfer token for a specified address
+  * @param _to The address to transfer to.
+  * @param _value The amount to be transferred.
+  */
+  function transfer(address _to, uint256 _value) public returns (bool) {
+    require(_to != address(0));
+    require(_value <= balances[msg.sender]);
+
+    // SafeMath.sub will throw if there is not enough balance.
+    balances[msg.sender] = balances[msg.sender].sub(_value);
+    balances[_to] = balances[_to].add(_value);
+    emitTransfer(msg.sender, _to, _value);
+    return true;
+  }
+
+  function emitTransfer(address _from, address _to, uint256 _value) internal {
+    Transfer(_from, _to, _value);
+  }
 
   /**
    * @dev Transfer tokens from one address to another
@@ -21,7 +42,7 @@ contract ERC20Impl is ERC20, ReadOnlyERC20, ERC20BasicImpl {
    * @param _to address The address which you want to transfer to
    * @param _value uint256 the amount of tokens to be transferred
    */
-  function transferFrom(address _from, address _to, uint256 _value) whenNotPaused public returns (bool) {
+  function transferFrom(address _from, address _to, uint256 _value) public returns (bool) {
     require(_to != address(0));
     require(_value <= balances[_from]);
     require(_value <= allowed[_from][msg.sender]);
@@ -43,7 +64,7 @@ contract ERC20Impl is ERC20, ReadOnlyERC20, ERC20BasicImpl {
    * @param _spender The address which will spend the funds.
    * @param _value The amount of tokens to be spent.
    */
-  function approve(address _spender, uint256 _value) whenNotPaused public returns (bool) {
+  function approve(address _spender, uint256 _value) public returns (bool) {
     allowed[msg.sender][_spender] = _value;
     Approval(msg.sender, _spender, _value);
     return true;
@@ -55,13 +76,13 @@ contract ERC20Impl is ERC20, ReadOnlyERC20, ERC20BasicImpl {
    * the first transaction is mined)
    * From MonolithDAO Token.sol
    */
-  function increaseApproval (address _spender, uint _addedValue) whenNotPaused public returns (bool success) {
+  function increaseApproval (address _spender, uint _addedValue) public returns (bool success) {
     allowed[msg.sender][_spender] = allowed[msg.sender][_spender].add(_addedValue);
     Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
     return true;
   }
 
-  function decreaseApproval (address _spender, uint _subtractedValue) whenNotPaused public returns (bool success) {
+  function decreaseApproval (address _spender, uint _subtractedValue) public returns (bool success) {
     uint oldValue = allowed[msg.sender][_spender];
     if (_subtractedValue > oldValue) {
       allowed[msg.sender][_spender] = 0;

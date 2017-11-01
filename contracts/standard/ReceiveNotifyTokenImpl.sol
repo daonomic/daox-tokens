@@ -1,12 +1,12 @@
 pragma solidity ^0.4.11;
 
 
-import './ERC20Impl.sol';
-import './ERC667.sol';
-import './ERC667Receiver.sol';
+import './TokenImpl.sol';
+import './ReceiveNotifyToken.sol';
+import './TokenReceiver.sol';
 
 
-contract ERC667Impl is ERC20Impl, ERC667 {
+contract ReceiveNotifyTokenImpl is TokenImpl, ReceiveNotifyToken {
     function transfer(address _to, uint256 _value, bytes _data) public returns (bool) {
         return transferAndCall(_to, _value, _data);
     }
@@ -19,7 +19,7 @@ contract ERC667Impl is ERC20Impl, ERC667 {
         balances[msg.sender] = balances[msg.sender].sub(_value);
         balances[_to] = balances[_to].add(_value);
         emitTransferWithData(msg.sender, _to, _value, _data);
-        ERC667Receiver(_to).onTokenTransfer(msg.sender, _value, _data);
+        TokenReceiver(_to).onTokenTransfer(msg.sender, _value, _data);
         return true;
     }
 
