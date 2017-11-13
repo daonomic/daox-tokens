@@ -20,4 +20,8 @@ contract BitcoinToken is Upgradeable, ExternalToken {
     function checkAdmin() internal {
         require(msg.sender == admin);
     }
+
+    function checkBurnData(uint256 _value, bytes _data) internal {
+        require(_data.length == 20);
+    }
 }
