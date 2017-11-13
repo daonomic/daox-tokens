@@ -1,4 +1,4 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.4.15;
 
 
 import "../../contracts-upgradeable/contracts/upgradeable/Upgradeable.sol";
