@@ -7,7 +7,7 @@ Some token contracts
 - [TokenImpl](contracts/standard/TokenImpl.sol) - ERC20 implementation
 - [ReadOnlyTokenImpl](contracts/standard/ReadOnlyTokenImpl.sol) - read-only version of ERC20 (so we can pause all operations)
 - [NotifyingTokenImpl](contracts/standard/NotifyingTokenImpl.sol) - ERC20 + transferAndCall functionality (notifies [TokenReceiver](contracts/standard/TokenReceiver.sol) about token transfers)
-- [ExternalToken](contracts/external/ExternalToken.sol) - NotifyingToken, but with mint/burn functions (ExternalToken represents some external value. It usually can be traded/burned 1:1 to real value)
+- [ExternalTokenImpl](contracts/external/ExternalTokenImpl.sol) - NotifyingToken, but with mint/burn functions (ExternalToken represents some external value. It usually can be traded/burned 1:1 to real value)
 
 ### Disclaimer
 

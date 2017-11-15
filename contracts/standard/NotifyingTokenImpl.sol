@@ -2,8 +2,8 @@ pragma solidity ^0.4.11;
 
 
 import './TokenImpl.sol';
-import './NotifyingToken.sol';
-import './TokenReceiver.sol';
+import 'daonomic-interfaces/contracts/NotifyingToken.sol';
+import 'daonomic-interfaces/contracts/TokenReceiver.sol';
 
 
 contract NotifyingTokenImpl is TokenImpl, NotifyingToken {

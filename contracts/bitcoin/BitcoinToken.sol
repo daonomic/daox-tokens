@@ -2,10 +2,10 @@ pragma solidity ^0.4.15;
 
 
 import "daonomic-upgradeable/contracts/Upgradeable.sol";
-import "../external/ExternalToken.sol";
+import "../external/ExternalTokenImpl.sol";
 
 
-contract BitcoinToken is Upgradeable, ExternalToken {
+contract BitcoinToken is Upgradeable, ExternalTokenImpl {
     string public constant name = "Bitcoin";
     string public constant symbol = "BTCT";
     uint8 public constant decimals = 8;

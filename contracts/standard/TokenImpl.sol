@@ -1,8 +1,8 @@
 pragma solidity ^0.4.11;
 
 import 'daonomic-util/contracts/SafeMath.sol';
+import 'daonomic-interfaces/contracts/Token.sol';
 import './ReadOnlyTokenImpl.sol';
-import './Token.sol';
 
 
 /**

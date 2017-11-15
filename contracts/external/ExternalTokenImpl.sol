@@ -1,14 +1,12 @@
 pragma solidity ^0.4.11;
 
 
+import 'daonomic-interfaces/contracts/ExternalToken.sol';
+import 'daonomic-interfaces/contracts/TokenReceiver.sol';
 import '../standard/NotifyingTokenImpl.sol';
-import '../standard/TokenReceiver.sol';
 
 
-contract ExternalToken is NotifyingTokenImpl {
-    event Mint(address indexed to, uint256 value, bytes data);
-    event Burn(address indexed burner, uint256 value, bytes data);
-
+contract ExternalTokenImpl is ExternalToken, NotifyingTokenImpl {
     modifier onlyMinter() {
         checkMinter();
         _;

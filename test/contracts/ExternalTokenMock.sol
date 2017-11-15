@@ -1,13 +1,13 @@
 pragma solidity ^0.4.0;
 
 
-import "../../contracts/external/ExternalToken.sol";
+import "../../contracts/external/ExternalTokenImpl.sol";
 
 
-contract ExternalTokenMock is ExternalToken {
+contract ExternalTokenMock is ExternalTokenImpl {
     address public minter;
 
-    function ExternalTokenMock() {
+    function ExternalTokenMock() public {
         minter = msg.sender;
     }
 
