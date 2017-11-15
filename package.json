@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/daonomic/daox-tokens",
   "dependencies": {
-    "daonomic-util": "0.0.1",
+    "daonomic-util": "0.0.2",
     "daonomic-upgradeable": "0.0.1"
   }
 }
