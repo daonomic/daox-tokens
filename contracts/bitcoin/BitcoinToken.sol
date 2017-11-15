@@ -1,7 +1,7 @@
 pragma solidity ^0.4.15;
 
 
-import "../../contracts-upgradeable/contracts/Upgradeable.sol";
+import "daonomic-upgradeable/contracts/Upgradeable.sol";
 import "../external/ExternalToken.sol";
 
 
