@@ -1,6 +1,6 @@
 pragma solidity ^0.4.11;
 
-import '../math/SafeMath.sol';
+import '../../util/contracts/SafeMath.sol';
 import './ReadOnlyTokenImpl.sol';
 import './Token.sol';
 

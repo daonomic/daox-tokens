@@ -1,3 +1,6 @@
 [submodule "contracts-upgradeable"]
 	path = contracts-upgradeable
 	url = https://github.com/0v1se/contracts-upgradeable.git
+[submodule "util"]
+	path = util
+	url = https://github.com/daonomic/util.git
