@@ -1,8 +1,9 @@
 var TokenMock = artifacts.require('./contracts/ExternalTokenMock.sol');
 var ReceiverMock = artifacts.require('./contracts/TokenReceiverMock.sol');
 
-const awaitEvent = require("./helpers/awaitEvent.js");
-const expectThrow = require("./helpers/expectThrow.js");
+const tests = require("@daonomic/tests-common");
+const awaitEvent = tests.awaitEvent;
+const expectThrow = tests.expectThrow;
 
 contract("ExternalToken", function(accounts) {
     let token;

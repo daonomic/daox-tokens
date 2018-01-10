@@ -1,7 +1,7 @@
 {
-  "name": "daox-tokens",
-  "version": "0.0.3",
-  "description": "Tokens for daox project",
+  "name": "@daonomic/daox-tokens",
+  "version": "0.1.0",
+  "description": "Contracts for DAOX project",
   "main": "truffle.js",
   "directories": {
     "test": "test"
@@ -22,8 +22,11 @@
   },
   "homepage": "https://github.com/daonomic/daox-tokens",
   "dependencies": {
-    "@daonomic/util": "0.1.1",
-    "@daonomic/interfaces": "0.1.2",
+    "@daonomic/util": "~0.1",
+    "@daonomic/interfaces": "~0.1",
     "daonomic-upgradeable": "0.0.1"
+  },
+  "devDependencies": {
+    "@daonomic/tests-common": "~0.1"
   }
 }

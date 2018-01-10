@@ -1,6 +1,7 @@
 var TokenMock = artifacts.require("./contracts/TokenMock.sol");
 
-const expectThrow = require("./helpers/expectThrow.js");
+const tests = require("@daonomic/tests-common");
+const expectThrow = tests.expectThrow;
 
 contract('TokenImpl', function(accounts) {
 

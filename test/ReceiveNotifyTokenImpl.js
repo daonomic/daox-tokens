@@ -1,7 +1,8 @@
 var TokenMock = artifacts.require('./contracts/ReceiveNotifyTokenMock.sol');
 var ReceiverMock = artifacts.require('./contracts/TokenReceiverMock.sol');
 
-const awaitEvent = require("./helpers/awaitEvent.js");
+const tests = require("@daonomic/tests-common");
+const awaitEvent = tests.awaitEvent;
 
 contract("ReceiveNotifyTokenImpl", function(accounts) {
     let token;
