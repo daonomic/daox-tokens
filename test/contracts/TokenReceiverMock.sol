@@ -1,7 +1,7 @@
 pragma solidity ^0.4.0;
 
 
-import 'daonomic-interfaces/contracts/TokenReceiver.sol';
+import '@daonomic/interfaces/contracts/TokenReceiver.sol';
 
 
 contract TokenReceiverMock is TokenReceiver {

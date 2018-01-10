@@ -1,7 +1,7 @@
 pragma solidity ^0.4.0;
 
 
-import 'daonomic-interfaces/contracts/ReadOnlyToken.sol';
+import '@daonomic/interfaces/contracts/ReadOnlyToken.sol';
 
 
 contract ReadOnlyTokenImpl is ReadOnlyToken {

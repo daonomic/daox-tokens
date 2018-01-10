@@ -1,8 +1,8 @@
 pragma solidity ^0.4.11;
 
 
-import 'daonomic-interfaces/contracts/ExternalToken.sol';
-import 'daonomic-interfaces/contracts/TokenReceiver.sol';
+import '@daonomic/interfaces/contracts/ExternalToken.sol';
+import '@daonomic/interfaces/contracts/TokenReceiver.sol';
 import '../standard/NotifyingTokenImpl.sol';
 
 
