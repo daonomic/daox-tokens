@@ -7,7 +7,7 @@ import './ExternalTokenImpl.sol';
 contract TestExternalToken is ExternalTokenImpl {
     address public minter;
 
-    function ExternalTokenMock() public {
+    function TestExternalToken() public {
         minter = msg.sender;
     }
 
