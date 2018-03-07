@@ -1,34 +1,12 @@
-var ProviderEngine = require("web3-provider-engine");
-var WalletSubprovider = require('web3-provider-engine/subproviders/wallet.js');
-var Web3Subprovider = require("web3-provider-engine/subproviders/web3.js");
-var Web3 = require("web3");
-var FilterSubprovider = require('web3-provider-engine/subproviders/filters.js')
-var Wallet = require("ethereumjs-wallet");
-
-function createEngine(url, wallet) {
-    var engine = new ProviderEngine();
-    engine.addProvider(new WalletSubprovider(wallet, {}));
-    engine.addProvider(new FilterSubprovider());
-    engine.addProvider(new Web3Subprovider(new Web3.providers.HttpProvider(url)));
-    engine.on('error', function(err) {
-        console.error(err.stack)
-    });
-    return engine;
-}
-
-var config;
+var network;
 for(var i=0; i < process.argv.length; i++) {
-    if (process.argv[i].startsWith("--config=")) {
-        config = process.argv[i].substring(9);
+    if (process.argv[i].startsWith("--network=")) {
+        network = process.argv[i].substring(10);
     }
 }
 
 function getUserHome() {
   return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
-}
-
-if (config && config.startsWith("~")) {
-    config = getUserHome() + config.substring(1);
 }
 
 module.exports = {
@@ -42,13 +20,32 @@ module.exports = {
 };
 
 var networkConfig = {
-    gas: 300000,
+    gas: 150000,
     gasPrice: 4000000000
 };
 
-if (config) {
-    console.log("using config file: " + config);
-    var json = require(config);
+if (network) {
+	var ProviderEngine = require("web3-provider-engine");
+	var WalletSubprovider = require('web3-provider-engine/subproviders/wallet.js');
+	var Web3Subprovider = require("web3-provider-engine/subproviders/web3.js");
+	var Web3 = require("web3");
+	var FilterSubprovider = require('web3-provider-engine/subproviders/filters.js')
+	var Wallet = require("ethereumjs-wallet");
+
+	function createEngine(url, wallet) {
+	    var engine = new ProviderEngine();
+	    engine.addProvider(new WalletSubprovider(wallet, {}));
+	    engine.addProvider(new FilterSubprovider());
+	    engine.addProvider(new Web3Subprovider(new Web3.providers.HttpProvider(url)));
+	    engine.on('error', function(err) {
+	        console.error(err.stack)
+	    });
+	    return engine;
+	}
+
+	var configName = getUserHome() + "/.ethereum/" + network + ".json";
+    console.log("using config file: " + configName);
+    var json = require(configName);
     var wallet = Wallet.fromPrivateKey(new Buffer(json.key, "hex"));
     var engine = createEngine(json.url, wallet);
     engine.start();
