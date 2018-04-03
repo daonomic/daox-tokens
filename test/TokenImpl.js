@@ -40,7 +40,7 @@ contract('TokenImpl', function(accounts) {
   });
 
   it('should return the correct allowance amount after approval', async function() {
-    let token = await TokenMock.new();
+    let token = await TokenMock.new(accounts[0], 100);
     await token.approve(accounts[1], 100);
     let allowance = await token.allowance(accounts[0], accounts[1]);
 

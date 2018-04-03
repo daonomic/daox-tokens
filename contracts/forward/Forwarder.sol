@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.21;
 
 import "@daonomic/util/contracts/OwnableImpl.sol";
 import "@daonomic/interfaces/contracts/EtherReceiver.sol";

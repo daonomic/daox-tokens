@@ -1,4 +1,4 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.21;
 
 import '@daonomic/util/contracts/SafeMath.sol';
 import '@daonomic/interfaces/contracts/Token.sol';
@@ -32,7 +32,7 @@ contract TokenImpl is Token, ReadOnlyTokenImpl {
   }
 
   function emitTransfer(address _from, address _to, uint256 _value) internal {
-    Transfer(_from, _to, _value);
+    emit Transfer(_from, _to, _value);
   }
 
   /**
@@ -65,7 +65,7 @@ contract TokenImpl is Token, ReadOnlyTokenImpl {
    */
   function approve(address _spender, uint256 _value) public returns (bool) {
     allowed[msg.sender][_spender] = _value;
-    Approval(msg.sender, _spender, _value);
+    emit Approval(msg.sender, _spender, _value);
     return true;
   }
 
@@ -77,7 +77,7 @@ contract TokenImpl is Token, ReadOnlyTokenImpl {
    */
   function increaseApproval (address _spender, uint _addedValue) public returns (bool success) {
     allowed[msg.sender][_spender] = allowed[msg.sender][_spender].add(_addedValue);
-    Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+    emit Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
     return true;
   }
 
@@ -88,7 +88,7 @@ contract TokenImpl is Token, ReadOnlyTokenImpl {
     } else {
       allowed[msg.sender][_spender] = oldValue.sub(_subtractedValue);
     }
-    Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+    emit Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
     return true;
   }
 

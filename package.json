@@ -24,7 +24,7 @@
   "dependencies": {
     "@daonomic/util": "~0.1",
     "@daonomic/interfaces": "~0.1",
-    "daonomic-upgradeable": "0.0.1"
+    "daonomic-upgradeable": "0.0.2"
   },
   "devDependencies": {
     "@daonomic/tests-common": "~0.1"

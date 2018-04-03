@@ -1,4 +1,4 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.21;
 
 
 import '@daonomic/interfaces/contracts/ExternalToken.sol';
@@ -30,7 +30,7 @@ contract ExternalTokenImpl is ExternalToken, NotifyingTokenImpl {
     function _mint(address _to, uint256 _value, bytes _data) private {
         totalSupply = totalSupply.add(_value);
         balances[_to] = balances[_to].add(_value);
-        Mint(_to, _value, _data);
+        emit Mint(_to, _value, _data);
     }
 
     function burn(uint256 _value, bytes _data) public {
@@ -41,7 +41,7 @@ contract ExternalTokenImpl is ExternalToken, NotifyingTokenImpl {
         address burner = msg.sender;
         balances[burner] = balances[burner].sub(_value);
         totalSupply = totalSupply.sub(_value);
-        Burn(burner, _value, _data);
+        emit Burn(burner, _value, _data);
     }
 
     function checkBurnData(uint256 _value, bytes _data) internal {

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.21;
 
 
 import './TokenImpl.sol';
@@ -28,7 +28,7 @@ contract NotifyingTokenImpl is TokenImpl, NotifyingToken {
     }
 
     function emitTransferWithData(address _from, address _to, uint256 _value, bytes _data) internal {
-        Transfer(_from, _to, _value, _data);
-        Transfer(_from, _to, _value);
+        emit Transfer(_from, _to, _value, _data);
+        emit Transfer(_from, _to, _value);
     }
 }
